@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="registrationForm" class="form-card" novalidate>
+            <h1>Student Registration Form</h1>
+            <p class="subtitle">Please fill in your details accurately</p>
+
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="fullName">Full Name (as shown on your National ID) <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" required placeholder="e.g. Ahmed Mohamed Ali Hassan">
+                <span class="error-message" id="err-fullName"></span>
+            </div>
+
+            <div class="form-row">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                    <span class="error-message" id="err-email"></span>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx" maxlength="11">
+                    <span class="error-message" id="err-phone"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- WhatsApp -->
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp Number <span class="required">*</span></label>
+                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="01xxxxxxxxx" maxlength="11">
+                    <span class="error-message" id="err-whatsapp"></span>
+                </div>
+
+                <!-- Age -->
+                <div class="form-group">
+                    <label for="age">Age <span class="required">*</span></label>
+                    <input type="number" id="age" name="age" required min="18" max="35" placeholder="Between 18 and 35">
+                    <span class="error-message" id="err-age"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- National ID -->
+                <div class="form-group">
+                    <label for="nationalId">National ID Number <span class="required">*</span></label>
+                    <input type="text" id="nationalId" name="nationalId" required maxlength="14" placeholder="14-digit National ID">
+                    <span class="error-message" id="err-nationalId"></span>
+                </div>
+
+                <!-- Governorate -->
+                <div class="form-group">
+                    <label for="governorate">Governorate <span class="required">*</span></label>
+                    <select id="governorate" name="governorate" required>
+                        <option value="" disabled selected>Select your governorate</option>
+                        <option>Cairo</option>
+                        <option>Alexandria</option>
+                        <option>Giza</option>
+                        <option>Qalyubia</option>
+                        <option>Port Said</option>
+                        <option>Suez</option>
+                        <option>Dakahlia</option>
+                        <option>Sharqia</option>
+                        <option>Gharbia</option>
+                        <option>Monufia</option>
+                        <option>Beheira</option>
+                        <option>Ismailia</option>
+                        <option>Faiyum</option>
+                        <option>Beni Suef</option>
+                        <option>Minya</option>
+                        <option>Asyut</option>
+                        <option>Sohag</option>
+                        <option>Qena</option>
+                        <option>Aswan</option>
+                        <option>Luxor</option>
+                        <option>Red Sea</option>
+                        <option>New Valley</option>
+                        <option>Matrouh</option>
+                        <option>North Sinai</option>
+                        <option>South Sinai</option>
+                        <option>Kafr El Sheikh</option>
+                        <option>Damietta</option>
+                    </select>
+                    <span class="error-message" id="err-governorate"></span>
+                </div>
+            </div>
+
+            <!-- Eraasoft student toggle -->
+            <div class="form-group">
+                <label>Are you (or were you) an Eraasoft student? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="isEraasoftStudent" value="Yes" required>
+                        Yes
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="isEraasoftStudent" value="No" required>
+                        No
+                    </label>
+                </div>
+                <span class="error-message" id="err-isEraasoftStudent"></span>
+            </div>
+
+            <!-- Extra fields shown only if Eraasoft student -->
+            <div id="eraasoftFields" class="conditional-block hidden">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="groupCode">Group Code <span class="required">*</span></label>
+                        <input type="text" id="groupCode" name="groupCode" placeholder="e.g. DA-101">
+                        <span class="error-message" id="err-groupCode"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="branch">Branch you used to attend <span class="required">*</span></label>
+                        <select id="branch" name="branch">
+                            <option value="" disabled selected>Select branch</option>
+                            <option>Dokki</option>
+                            <option>M.Nasr</option>
+                            <option>Alex</option>
+                            <option>Online</option>
+                        </select>
+                        <span class="error-message" id="err-branch"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="instructor">Instructor Name <span class="required">*</span></label>
+                    <input type="text" id="instructor" name="instructor" placeholder="Instructor's full name">
+                    <span class="error-message" id="err-instructor"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- Training type -->
+                <div class="form-group">
+                    <label for="trainingType">Training Type <span class="required">*</span></label>
+                    <select id="trainingType" name="trainingType" required>
+                        <option value="" disabled selected>Select training type</option>
+                        <option value="Business">Business</option>
+                        <option value="Technical">Technical</option>
+                    </select>
+                    <span class="error-message" id="err-trainingType"></span>
+                </div>
+
+                <!-- Track (populated dynamically) -->
+                <div class="form-group hidden" id="trackGroup">
+                    <label for="track">Track <span class="required">*</span></label>
+                    <select id="track" name="track">
+                        <option value="" disabled selected>Select track</option>
+                    </select>
+                    <span class="error-message" id="err-track"></span>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Submit</button>
+
+            <div id="formMessage" class="form-message hidden"></div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
