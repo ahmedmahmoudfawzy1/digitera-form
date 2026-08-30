@@ -2,6 +2,7 @@
 // See README.md for full setup/deployment steps.
 
 const SHEET_NAME = "Responses"; // change if you want a different sheet/tab name
+const SPREADSHEET_ID = "1_xfmbhPuWdgu1gTWx4K9PF65wAjcwbR0boGws-jIeVc"; // target Google Sheet
 
 const HEADERS = [
   "Timestamp",
@@ -46,14 +47,32 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({ result: "success" }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: "error", message: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
+    console.error("doPost failed: " + err.stack);
+    throw err;
   }
 }
 
+// Quick check: open the /exec URL in a browser. If you see "OK - sheet: ..." the
+// script can reach the target spreadsheet and the deployment is live.
+function doGet(e) {
+  try {
+    const sheet = getOrCreateSheet_();
+    return ContentService.createTextOutput(
+      "OK - sheet: " + sheet.getParent().getName() + " / tab: " + sheet.getName()
+    );
+  } catch (err) {
+    return ContentService.createTextOutput("ERROR: " + err.message);
+  }
+}
+
+// Run this manually from the editor once to (a) trigger the authorization prompt
+// and (b) confirm a row lands in the right spreadsheet.
+function testAppend_() {
+  doPost({ parameter: { fullName: "TEST ROW", email: "test@example.com" } });
+}
+
 function getOrCreateSheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   let sheet = ss.getSheetByName(SHEET_NAME);
 
   if (!sheet) {
