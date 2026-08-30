@@ -9,7 +9,10 @@ const trainingType = document.getElementById("trainingType");
 const trackGroup = document.getElementById("trackGroup");
 const trackSelect = document.getElementById("track");
 const submitBtn = document.getElementById("submitBtn");
-const formMessage = document.getElementById("formMessage");
+const modalOverlay = document.getElementById("modalOverlay");
+const modalIcon = document.getElementById("modalIcon");
+const modalText = document.getElementById("modalText");
+const modalClose = document.getElementById("modalClose");
 
 const TRACKS = {
     Business: ["Data Analysis"],
@@ -165,14 +168,39 @@ function validateForm(data) {
         setError("track", "");
     }
 
+    // Project link
+    const urlPattern = /^https?:\/\/[^\s.]+\.[^\s]{2,}$/i;
+    if (!data.projectLink || !urlPattern.test(data.projectLink.trim())) {
+        setError("projectLink", "Please enter a valid project link (starting with http:// or https://).");
+        isValid = false;
+    } else {
+        setError("projectLink", "");
+    }
+
     return isValid;
 }
 
-function showMessage(text, type) {
-    formMessage.textContent = text;
-    formMessage.className = `form-message ${type}`;
-    formMessage.classList.remove("hidden");
+const MODAL_STYLES = {
+    error: { icon: "✕", classes: "bg-red-100 text-red-600" },
+    info: { icon: "ℹ", classes: "bg-brand-100 text-brand-600" },
+};
+
+function showModal(text, type = "error") {
+    const style = MODAL_STYLES[type] || MODAL_STYLES.error;
+    modalText.textContent = text;
+    modalIcon.textContent = style.icon;
+    modalIcon.className = "mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full text-3xl " + style.classes;
+    modalOverlay.classList.remove("hidden");
 }
+
+function hideModal() {
+    modalOverlay.classList.add("hidden");
+}
+
+modalClose.addEventListener("click", hideModal);
+modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) hideModal();
+});
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -181,18 +209,17 @@ form.addEventListener("submit", async (e) => {
     const data = Object.fromEntries(formData.entries());
 
     if (!validateForm(data)) {
-        showMessage("Please fix the errors above before submitting.", "error");
+        showModal("Please fix the highlighted errors before submitting.", "error");
         return;
     }
 
     if (SCRIPT_URL.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE")) {
-        showMessage("Setup incomplete: please add your Google Apps Script URL in script.js.", "error");
+        showModal("Setup incomplete: please add your Google Apps Script URL in script.js.", "error");
         return;
     }
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
-    formMessage.classList.add("hidden");
 
     try {
         await fetch(SCRIPT_URL, {
@@ -203,13 +230,9 @@ form.addEventListener("submit", async (e) => {
 
         // "no-cors" mode returns an opaque response, so we cannot verify the
         // actual result — treat a resolved request as success.
-        showMessage("Thank you! Your registration has been submitted successfully.", "success");
-        form.reset();
-        eraasoftFields.classList.add("hidden");
-        trackGroup.classList.add("hidden");
+        window.location.href = "success.html";
     } catch (err) {
-        showMessage("Something went wrong while submitting. Please check your internet connection and try again.", "error");
-    } finally {
+        showModal("Something went wrong while submitting. Please check your internet connection and try again.", "error");
         submitBtn.disabled = false;
         submitBtn.textContent = "Submit";
     }

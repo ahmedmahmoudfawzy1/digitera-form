@@ -1,8 +1,10 @@
 # Student Registration Form → Google Sheets
 
 Files:
-- `index.html` / `style.css` / `script.js` — the form
+- `index.html` / `script.js` — the form (styled with Tailwind CSS via the Play CDN, no build step)
+- `success.html` — the page users land on after a successful submission
 - `apps-script.gs` — backend code that saves submissions into your Google Sheet
+- `assets/` — logo images shown at the top of the form (EraaSoft is the main logo, partner logos sit in a wrapped row beneath it). See `assets/README.md` for the exact filenames to drop in.
 
 ## Setup steps
 
@@ -28,6 +30,8 @@ If you add/rename a field in `index.html`, update the matching field name in `ap
 
 ## Notes
 
+- On a successful submission the browser is redirected to `success.html`. Validation / network errors show as a centered pop-up modal instead.
+- If you already had a "Responses" tab before the "Project Link" column was added, add the `Project Link` header manually as the last column (the script only writes headers when the tab is empty).
 - The Eraasoft-specific fields (Group Code, Branch, Instructor) only appear/are required when "Yes" is selected.
 - The Track dropdown is populated dynamically: choosing **Business** shows only "Data Analysis"; choosing **Technical** shows Front-end, Back-end .NET, Flutter, UI/UX, and Back-end PHP.
 - Every deployment update in Apps Script requires choosing **Deploy > Manage deployments > Edit > New version** for changes to `apps-script.gs` to take effect on the same URL.

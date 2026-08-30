@@ -18,7 +18,8 @@ const HEADERS = [
   "Branch",
   "Instructor",
   "Training Type",
-  "Track"
+  "Track",
+  "Project Link"
 ];
 
 function doPost(e) {
@@ -40,7 +41,8 @@ function doPost(e) {
       data.branch || "",
       data.instructor || "",
       data.trainingType || "",
-      data.track || ""
+      data.track || "",
+      data.projectLink || ""
     ]);
 
     return ContentService
