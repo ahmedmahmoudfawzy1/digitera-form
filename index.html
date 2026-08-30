@@ -1,276 +1,282 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Registration Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // Eraasoft brand identity
-                        brand: {
-                            50: "#eef2fb",
-                            100: "#d9e1f6",
-                            200: "#b3c3ec",
-                            300: "#8da5e3",
-                            400: "#4f6fc9",
-                            500: "#2243a4",
-                            600: "#1d3a8f",
-                            700: "#182f75",
-                            800: "#13245c",
-                            900: "#0e1a42",
-                        },
-                        accent: {
-                            400: "#f4d03f",
-                            500: "#f1c40f",
-                            600: "#d4ac0d",
-                        },
-                    },
-                    fontFamily: {
-                        sans: ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
-                    },
-                },
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Eraasoft brand identity
+              brand: {
+                50: "#eef2fb",
+                100: "#d9e1f6",
+                200: "#b3c3ec",
+                300: "#8da5e3",
+                400: "#4f6fc9",
+                500: "#2243a4",
+                600: "#1d3a8f",
+                700: "#182f75",
+                800: "#13245c",
+                900: "#0e1a42",
+              },
+              accent: {
+                400: "#f4d03f",
+                500: "#f1c40f",
+                600: "#d4ac0d",
+              },
             },
-        };
+            fontFamily: {
+              sans: ["Segoe UI", "Tahoma", "Geneva", "Verdana", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
     <style type="text/tailwindcss">
-        @layer components {
-            .field-label {
-                @apply block mb-1.5 text-[13px] font-semibold text-slate-700;
-            }
-            .field-input {
-                @apply w-full rounded-lg border-[1.5px] border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-800
+      @layer components {
+        .field-label {
+          @apply block mb-1.5 text-[13px] font-semibold text-slate-700;
+        }
+        .field-input {
+          @apply w-full rounded-lg border-[1.5px] border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-800
                        transition-colors placeholder:text-slate-400
                        focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-500/15;
-            }
-            .field-input.invalid {
-                @apply border-red-500 bg-white;
-            }
-            .error-message {
-                @apply block min-h-[14px] mt-1 text-xs text-red-600;
-            }
-            .partner-logo {
-                @apply h-7 w-auto object-contain sm:h-9;
-            }
         }
+        .field-input.invalid {
+          @apply border-red-500 bg-white;
+        }
+        .error-message {
+          @apply block min-h-[14px] mt-1 text-xs text-red-600;
+        }
+        .partner-logo {
+          @apply h-7 w-auto object-contain sm:h-9;
+        }
+      }
     </style>
     <style>
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.9) translateY(8px); }
-            to   { opacity: 1; transform: scale(1) translateY(0); }
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(8px);
         }
-        .modal-pop { animation: popIn 0.2s ease-out; }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .modal-pop {
+        animation: popIn 0.2s ease-out;
+      }
     </style>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-brand-600 via-brand-500 to-brand-800 font-sans antialiased">
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-brand-600 via-brand-500 to-brand-800 font-sans antialiased">
     <div class="flex min-h-screen items-center justify-center px-4 py-10">
-        <form id="registrationForm" novalidate
-              class="w-full max-w-2xl rounded-2xl border-t-[6px] border-accent-500 bg-white p-6 shadow-[0_20px_45px_rgba(14,26,66,0.35)] sm:p-9">
-            <!-- Branding: primary partners -->
-            <div class="mb-7 border-b border-slate-100 pb-6">
-                <div class="flex flex-wrap items-center justify-evenly gap-x-6 gap-y-4">
-                    <img src="assets/eraasoft.png" alt="EraaSoft" class="h-12 w-auto object-contain sm:h-14">
-                    <img src="assets/icareer.png" alt="iCareer" class="partner-logo">
-                    <img src="assets/digitera.png" alt="Digitera" class="partner-logo">
-                </div>
+      <form id="registrationForm" novalidate class="w-full max-w-2xl rounded-2xl border-t-[6px] border-accent-500 bg-white p-6 shadow-[0_20px_45px_rgba(14,26,66,0.35)] sm:p-9">
+        <!-- Branding: primary partners -->
+        <div class="mb-7 border-b border-slate-100 pb-6">
+          <div class="flex flex-wrap items-center justify-evenly gap-x-6 gap-y-4">
+            <img src="assets/eraasoft.png" alt="EraaSoft" class="w-40 h-20 object-cover" />
+            <img src="assets/icareer.png" alt="iCareer" class="partner-logo w-40" />
+            <img src="assets/digitera.png" alt="Digitera" class="partner-logo" />
+            <div class="w-full flex justify-center">
+              <img src="assets/ready-for-tomorrow.png" alt="Ready For Tomorrow" class="partner-logo object-contain" style="display: block; width: 500px; height: 60px" />
             </div>
+          </div>
+        </div>
 
-            <h1 class="text-center text-2xl font-bold text-brand-500">Student Registration Form</h1>
-            <p class="mt-1 mb-7 text-center text-sm text-slate-400">Please fill in your details accurately</p>
+        <h1 class="text-center text-2xl font-bold text-brand-500">Student Registration Form</h1>
+        <p class="mt-1 mb-7 text-center text-sm text-slate-400">Please fill in your details accurately</p>
 
-            <!-- Full Name -->
+        <!-- Full Name -->
+        <div class="mb-4">
+          <label for="fullName" class="field-label">Full Name (as shown on your National ID) <span class="text-accent-600">*</span></label>
+          <input type="text" id="fullName" name="fullName" required placeholder="e.g. Sahar Ehab Abdullah." class="field-input" />
+          <span class="error-message" id="err-fullName"></span>
+        </div>
+
+        <div class="grid gap-x-4 sm:grid-cols-2">
+          <!-- Email -->
+          <div class="mb-4">
+            <label for="email" class="field-label">Email <span class="text-accent-600">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="example@email.com" class="field-input" />
+            <span class="error-message" id="err-email"></span>
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-4">
+            <label for="phone" class="field-label">Phone Number <span class="text-accent-600">*</span></label>
+            <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx" maxlength="11" class="field-input" />
+            <span class="error-message" id="err-phone"></span>
+          </div>
+        </div>
+
+        <div class="grid gap-x-4 sm:grid-cols-2">
+          <!-- WhatsApp -->
+          <div class="mb-4">
+            <label for="whatsapp" class="field-label">WhatsApp Number <span class="text-accent-600">*</span></label>
+            <input type="tel" id="whatsapp" name="whatsapp" required placeholder="01xxxxxxxxx" maxlength="11" class="field-input" />
+            <span class="error-message" id="err-whatsapp"></span>
+          </div>
+
+          <!-- Age -->
+          <div class="mb-4">
+            <label for="age" class="field-label">Age <span class="text-accent-600">*</span></label>
+            <input type="number" id="age" name="age" required min="18" max="35" placeholder="Between 18 and 35" class="field-input" />
+            <span class="error-message" id="err-age"></span>
+          </div>
+        </div>
+
+        <div class="grid gap-x-4 sm:grid-cols-2">
+          <!-- National ID -->
+          <div class="mb-4">
+            <label for="nationalId" class="field-label">National ID Number <span class="text-accent-600">*</span></label>
+            <input type="text" id="nationalId" name="nationalId" required maxlength="14" placeholder="14-digit National ID" class="field-input" />
+            <span class="error-message" id="err-nationalId"></span>
+          </div>
+
+          <!-- Governorate -->
+          <div class="mb-4">
+            <label for="governorate" class="field-label">Governorate <span class="text-accent-600">*</span></label>
+            <select id="governorate" name="governorate" required class="field-input">
+              <option value="" disabled selected>Select your governorate</option>
+              <option>Cairo</option>
+              <option>Alexandria</option>
+              <option>Giza</option>
+              <option>Qalyubia</option>
+              <option>Port Said</option>
+              <option>Suez</option>
+              <option>Dakahlia</option>
+              <option>Sharqia</option>
+              <option>Gharbia</option>
+              <option>Monufia</option>
+              <option>Beheira</option>
+              <option>Ismailia</option>
+              <option>Faiyum</option>
+              <option>Beni Suef</option>
+              <option>Minya</option>
+              <option>Asyut</option>
+              <option>Sohag</option>
+              <option>Qena</option>
+              <option>Aswan</option>
+              <option>Luxor</option>
+              <option>Red Sea</option>
+              <option>New Valley</option>
+              <option>Matrouh</option>
+              <option>North Sinai</option>
+              <option>South Sinai</option>
+              <option>Kafr El Sheikh</option>
+              <option>Damietta</option>
+            </select>
+            <span class="error-message" id="err-governorate"></span>
+          </div>
+        </div>
+
+        <!-- Eraasoft student toggle -->
+        <div class="mb-4">
+          <label class="field-label">Are you (or were you) an Eraasoft student? <span class="text-accent-600">*</span></label>
+          <div class="flex gap-6">
+            <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+              <input type="radio" name="isEraasoftStudent" value="Yes" required class="h-4 w-4 accent-brand-500" />
+              Yes
+            </label>
+            <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+              <input type="radio" name="isEraasoftStudent" value="No" required class="h-4 w-4 accent-brand-500" />
+              No
+            </label>
+          </div>
+          <span class="error-message" id="err-isEraasoftStudent"></span>
+        </div>
+
+        <!-- Extra fields shown only if Eraasoft student -->
+        <div id="eraasoftFields" class="hidden mb-4 rounded-lg border-l-[3px] border-accent-500 bg-brand-50 p-4 pb-0.5">
+          <div class="grid gap-x-4 sm:grid-cols-2">
             <div class="mb-4">
-                <label for="fullName" class="field-label">Full Name (as shown on your National ID) <span class="text-accent-600">*</span></label>
-                <input type="text" id="fullName" name="fullName" required placeholder="e.g. Ahmed Mohamed Ali Hassan" class="field-input">
-                <span class="error-message" id="err-fullName"></span>
+              <label for="groupCode" class="field-label">Group Code <span class="text-accent-600">*</span></label>
+              <input type="text" id="groupCode" name="groupCode" placeholder="e.g. DA-101" class="field-input" />
+              <span class="error-message" id="err-groupCode"></span>
             </div>
 
-            <div class="grid gap-x-4 sm:grid-cols-2">
-                <!-- Email -->
-                <div class="mb-4">
-                    <label for="email" class="field-label">Email <span class="text-accent-600">*</span></label>
-                    <input type="email" id="email" name="email" required placeholder="example@email.com" class="field-input">
-                    <span class="error-message" id="err-email"></span>
-                </div>
-
-                <!-- Phone -->
-                <div class="mb-4">
-                    <label for="phone" class="field-label">Phone Number <span class="text-accent-600">*</span></label>
-                    <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx" maxlength="11" class="field-input">
-                    <span class="error-message" id="err-phone"></span>
-                </div>
-            </div>
-
-            <div class="grid gap-x-4 sm:grid-cols-2">
-                <!-- WhatsApp -->
-                <div class="mb-4">
-                    <label for="whatsapp" class="field-label">WhatsApp Number <span class="text-accent-600">*</span></label>
-                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="01xxxxxxxxx" maxlength="11" class="field-input">
-                    <span class="error-message" id="err-whatsapp"></span>
-                </div>
-
-                <!-- Age -->
-                <div class="mb-4">
-                    <label for="age" class="field-label">Age <span class="text-accent-600">*</span></label>
-                    <input type="number" id="age" name="age" required min="18" max="35" placeholder="Between 18 and 35" class="field-input">
-                    <span class="error-message" id="err-age"></span>
-                </div>
-            </div>
-
-            <div class="grid gap-x-4 sm:grid-cols-2">
-                <!-- National ID -->
-                <div class="mb-4">
-                    <label for="nationalId" class="field-label">National ID Number <span class="text-accent-600">*</span></label>
-                    <input type="text" id="nationalId" name="nationalId" required maxlength="14" placeholder="14-digit National ID" class="field-input">
-                    <span class="error-message" id="err-nationalId"></span>
-                </div>
-
-                <!-- Governorate -->
-                <div class="mb-4">
-                    <label for="governorate" class="field-label">Governorate <span class="text-accent-600">*</span></label>
-                    <select id="governorate" name="governorate" required class="field-input">
-                        <option value="" disabled selected>Select your governorate</option>
-                        <option>Cairo</option>
-                        <option>Alexandria</option>
-                        <option>Giza</option>
-                        <option>Qalyubia</option>
-                        <option>Port Said</option>
-                        <option>Suez</option>
-                        <option>Dakahlia</option>
-                        <option>Sharqia</option>
-                        <option>Gharbia</option>
-                        <option>Monufia</option>
-                        <option>Beheira</option>
-                        <option>Ismailia</option>
-                        <option>Faiyum</option>
-                        <option>Beni Suef</option>
-                        <option>Minya</option>
-                        <option>Asyut</option>
-                        <option>Sohag</option>
-                        <option>Qena</option>
-                        <option>Aswan</option>
-                        <option>Luxor</option>
-                        <option>Red Sea</option>
-                        <option>New Valley</option>
-                        <option>Matrouh</option>
-                        <option>North Sinai</option>
-                        <option>South Sinai</option>
-                        <option>Kafr El Sheikh</option>
-                        <option>Damietta</option>
-                    </select>
-                    <span class="error-message" id="err-governorate"></span>
-                </div>
-            </div>
-
-            <!-- Eraasoft student toggle -->
             <div class="mb-4">
-                <label class="field-label">Are you (or were you) an Eraasoft student? <span class="text-accent-600">*</span></label>
-                <div class="flex gap-6">
-                    <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
-                        <input type="radio" name="isEraasoftStudent" value="Yes" required class="h-4 w-4 accent-brand-500">
-                        Yes
-                    </label>
-                    <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
-                        <input type="radio" name="isEraasoftStudent" value="No" required class="h-4 w-4 accent-brand-500">
-                        No
-                    </label>
-                </div>
-                <span class="error-message" id="err-isEraasoftStudent"></span>
+              <label for="branch" class="field-label">Branch you used to attend <span class="text-accent-600">*</span></label>
+              <select id="branch" name="branch" class="field-input">
+                <option value="" disabled selected>Select branch</option>
+                <option>Dokki</option>
+                <option>M.Nasr</option>
+                <option>Alex</option>
+                <option>Online</option>
+              </select>
+              <span class="error-message" id="err-branch"></span>
             </div>
+          </div>
 
-            <!-- Extra fields shown only if Eraasoft student -->
-            <div id="eraasoftFields" class="hidden mb-4 rounded-lg border-l-[3px] border-accent-500 bg-brand-50 p-4 pb-0.5">
-                <div class="grid gap-x-4 sm:grid-cols-2">
-                    <div class="mb-4">
-                        <label for="groupCode" class="field-label">Group Code <span class="text-accent-600">*</span></label>
-                        <input type="text" id="groupCode" name="groupCode" placeholder="e.g. DA-101" class="field-input">
-                        <span class="error-message" id="err-groupCode"></span>
-                    </div>
+          <div class="mb-4">
+            <label for="instructor" class="field-label">Instructor Name <span class="text-accent-600">*</span></label>
+            <input type="text" id="instructor" name="instructor" placeholder="Instructor's full name" class="field-input" />
+            <span class="error-message" id="err-instructor"></span>
+          </div>
+        </div>
 
-                    <div class="mb-4">
-                        <label for="branch" class="field-label">Branch you used to attend <span class="text-accent-600">*</span></label>
-                        <select id="branch" name="branch" class="field-input">
-                            <option value="" disabled selected>Select branch</option>
-                            <option>Dokki</option>
-                            <option>M.Nasr</option>
-                            <option>Alex</option>
-                            <option>Online</option>
-                        </select>
-                        <span class="error-message" id="err-branch"></span>
-                    </div>
-                </div>
+        <div class="grid gap-x-4 sm:grid-cols-2">
+          <!-- Training type -->
+          <div class="mb-4">
+            <label for="trainingType" class="field-label">Training Type <span class="text-accent-600">*</span></label>
+            <select id="trainingType" name="trainingType" required class="field-input">
+              <option value="" disabled selected>Select training type</option>
+              <option value="Business">Business</option>
+              <option value="Technical">Technical</option>
+            </select>
+            <span class="error-message" id="err-trainingType"></span>
+          </div>
 
-                <div class="mb-4">
-                    <label for="instructor" class="field-label">Instructor Name <span class="text-accent-600">*</span></label>
-                    <input type="text" id="instructor" name="instructor" placeholder="Instructor's full name" class="field-input">
-                    <span class="error-message" id="err-instructor"></span>
-                </div>
-            </div>
+          <!-- Track (populated dynamically) -->
+          <div class="hidden mb-4" id="trackGroup">
+            <label for="track" class="field-label">Track <span class="text-accent-600">*</span></label>
+            <select id="track" name="track" class="field-input">
+              <option value="" disabled selected>Select track</option>
+            </select>
+            <span class="error-message" id="err-track"></span>
+          </div>
+        </div>
 
-            <div class="grid gap-x-4 sm:grid-cols-2">
-                <!-- Training type -->
-                <div class="mb-4">
-                    <label for="trainingType" class="field-label">Training Type <span class="text-accent-600">*</span></label>
-                    <select id="trainingType" name="trainingType" required class="field-input">
-                        <option value="" disabled selected>Select training type</option>
-                        <option value="Business">Business</option>
-                        <option value="Technical">Technical</option>
-                    </select>
-                    <span class="error-message" id="err-trainingType"></span>
-                </div>
+        <!-- Project Link -->
+        <div class="mb-4">
+          <label for="projectLink" class="field-label">Project Link (GitHub / Portfolio / Drive) <span class="text-accent-600">*</span></label>
+          <input type="url" id="projectLink" name="projectLink" required placeholder="https://github.com/username/project" class="field-input" />
+          <span class="error-message" id="err-projectLink"></span>
+        </div>
 
-                <!-- Track (populated dynamically) -->
-                <div class="hidden mb-4" id="trackGroup">
-                    <label for="track" class="field-label">Track <span class="text-accent-600">*</span></label>
-                    <select id="track" name="track" class="field-input">
-                        <option value="" disabled selected>Select track</option>
-                    </select>
-                    <span class="error-message" id="err-track"></span>
-                </div>
-            </div>
+        <button
+          type="submit"
+          id="submitBtn"
+          class="mt-2 w-full rounded-xl bg-brand-500 px-4 py-3 text-base font-bold text-white shadow-[0_8px_20px_rgba(34,67,164,0.35)] transition hover:bg-brand-600 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60">
+          Submit
+        </button>
 
-            <!-- Project Link -->
-            <div class="mb-4">
-                <label for="projectLink" class="field-label">Project Link (GitHub / Portfolio / Drive) <span class="text-accent-600">*</span></label>
-                <input type="url" id="projectLink" name="projectLink" required placeholder="https://github.com/username/project" class="field-input">
-                <span class="error-message" id="err-projectLink"></span>
-            </div>
-
-            <button type="submit" id="submitBtn"
-                    class="mt-2 w-full rounded-xl bg-brand-500 px-4 py-3 text-base font-bold text-white
-                           shadow-[0_8px_20px_rgba(34,67,164,0.35)] transition
-                           hover:bg-brand-600 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60">
-                Submit
-            </button>
-
-            <!-- Supporting partners / programme logos -->
-            <div class="mt-8 border-t border-slate-100 pt-6">
-                <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:gap-x-7 sm:gap-y-4">
-                    <img src="assets/ready-for-tomorrow.png" alt="Ready For Tomorrow" class="partner-logo">
-                    <img src="assets/danish-arab-partnership.png" alt="Danish-Arab Partnership Programme" class="partner-logo">
-                    <img src="assets/danish-arab-partnership..jpg" alt="Dansk Erhverv – Danish Chamber of Commerce" class="partner-logo">
-                    <img src="assets/mofa-denmark.png" alt="Ministry of Foreign Affairs of Denmark" class="partner-logo">
-                    <img src="assets/plan-international.png" alt="Plan International" class="partner-logo">
-                </div>
-            </div>
-        </form>
+        <!-- Supporting partners / programme logos -->
+        <div class="mt-8 border-t border-slate-100 pt-6">
+          <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:gap-x-7 sm:gap-y-4">
+            <img src="assets/danish-arab-partnership.png" alt="Danish-Arab Partnership Programme" class="partner-logo" />
+            <img src="assets/danish-arab-partnership..jpg" alt="Dansk Erhverv – Danish Chamber of Commerce" class="partner-logo" />
+            <img src="assets/mofa-denmark.png" alt="Ministry of Foreign Affairs of Denmark" class="partner-logo" />
+            <img src="assets/plan-international.png" alt="Plan International" class="partner-logo" />
+          </div>
+        </div>
+      </form>
     </div>
 
     <!-- Center popup modal (used for errors / notices) -->
     <div id="modalOverlay" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-brand-900/50 p-4 backdrop-blur-sm">
-        <div class="modal-pop w-full max-w-sm rounded-2xl bg-white p-6 text-center shadow-2xl">
-            <div id="modalIcon" class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full text-3xl"></div>
-            <p id="modalText" class="text-[15px] leading-relaxed text-slate-700"></p>
-            <button type="button" id="modalClose"
-                    class="mt-5 w-full rounded-xl bg-brand-500 px-4 py-2.5 font-bold text-white transition hover:bg-brand-600">
-                OK
-            </button>
-        </div>
+      <div class="modal-pop w-full max-w-sm rounded-2xl bg-white p-6 text-center shadow-2xl">
+        <div id="modalIcon" class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full text-3xl"></div>
+        <p id="modalText" class="text-[15px] leading-relaxed text-slate-700"></p>
+        <button type="button" id="modalClose" class="mt-5 w-full rounded-xl bg-brand-500 px-4 py-2.5 font-bold text-white transition hover:bg-brand-600">OK</button>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
