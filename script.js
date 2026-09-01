@@ -1,5 +1,4 @@
-// IMPORTANT: replace this with your own Google Apps Script Web App URL
-// (see apps-script.gs and README.md for setup instructions)
+
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynuxMKnr_LqFW0BoozwdFioZorxYOx1VfeEyBUqmpjb7MejcX8aOD_-NUVgmzm7Y8Kww/exec";
 
 const form = document.getElementById("registrationForm");
