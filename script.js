@@ -123,6 +123,30 @@ function validateForm(data) {
         setError("governorate", "");
     }
 
+    // University
+    if (!data.university || data.university.trim().length < 2) {
+        setError("university", "Please enter your university.");
+        isValid = false;
+    } else {
+        setError("university", "");
+    }
+
+    // Faculty
+    if (!data.faculty || data.faculty.trim().length < 2) {
+        setError("faculty", "Please enter your faculty.");
+        isValid = false;
+    } else {
+        setError("faculty", "");
+    }
+
+    // Gender
+    if (!data.gender) {
+        setError("gender", "Please select your gender.");
+        isValid = false;
+    } else {
+        setError("gender", "");
+    }
+
     // Eraasoft student
     if (!data.isEraasoftStudent) {
         setError("isEraasoftStudent", "Please select an option.");
@@ -221,15 +245,23 @@ form.addEventListener("submit", async (e) => {
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
-    try {
-        await fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: formData
-        });
+    // URLSearchParams keeps this a "simple" CORS request (no preflight), so we
+    // can read the JSON response the Apps Script returns.
+    const params = new URLSearchParams();
+    for (const [key, value] of formData.entries()) params.append(key, value);
 
-        // "no-cors" mode returns an opaque response, so we cannot verify the
-        // actual result — treat a resolved request as success.
+    try {
+        const res = await fetch(SCRIPT_URL, { method: "POST", body: params });
+        const result = await res.json();
+
+        if (result.result === "duplicate") {
+            setError("email", "This email is already registered.");
+            showModal("This email address has already been used to register. Please use a different email.", "error");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit";
+            return;
+        }
+
         window.location.href = "success.html";
     } catch (err) {
         showModal("Something went wrong while submitting. Please check your internet connection and try again.", "error");

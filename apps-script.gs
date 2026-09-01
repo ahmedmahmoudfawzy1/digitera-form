@@ -13,6 +13,9 @@ const HEADERS = [
   "Age",
   "National ID",
   "Governorate",
+  "University",
+  "Faculty",
+  "Gender",
   "Eraasoft Student",
   "Group Code",
   "Branch",
@@ -23,9 +26,16 @@ const HEADERS = [
 ];
 
 function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000); // serialize submissions so the duplicate check is race-free
   try {
     const sheet = getOrCreateSheet_();
     const data = e.parameter;
+    const email = String(data.email || "").trim().toLowerCase();
+
+    if (email && emailExists_(sheet, email)) {
+      return jsonOutput_({ result: "duplicate", message: "This email is already registered." });
+    }
 
     sheet.appendRow([
       new Date(),
@@ -36,6 +46,9 @@ function doPost(e) {
       data.age || "",
       data.nationalId || "",
       data.governorate || "",
+      data.university || "",
+      data.faculty || "",
+      data.gender || "",
       data.isEraasoftStudent || "",
       data.groupCode || "",
       data.branch || "",
@@ -45,11 +58,29 @@ function doPost(e) {
       data.projectLink || ""
     ]);
 
-    return ContentService.createTextOutput(JSON.stringify({ result: "success" })).setMimeType(ContentService.MimeType.JSON);
+    return jsonOutput_({ result: "success" });
   } catch (err) {
     console.error("doPost failed: " + err.stack);
     throw err;
+  } finally {
+    lock.releaseLock();
   }
+}
+
+// Returns true if the given (already lowercased/trimmed) email is present in the
+// Email column of any existing response row.
+function emailExists_(sheet, email) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return false;
+  const emailCol = HEADERS.indexOf("Email") + 1;
+  const values = sheet.getRange(2, emailCol, lastRow - 1, 1).getValues();
+  return values.some(function (row) {
+    return String(row[0]).trim().toLowerCase() === email;
+  });
+}
+
+function jsonOutput_(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
 // Quick check: open the /exec URL in a browser. If you see "OK - sheet: ..." the

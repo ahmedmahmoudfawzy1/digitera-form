@@ -172,6 +172,38 @@
           </div>
         </div>
 
+        <div class="grid gap-x-4 sm:grid-cols-2">
+          <!-- University -->
+          <div class="mb-4">
+            <label for="university" class="field-label">University <span class="text-accent-600">*</span></label>
+            <input type="text" id="university" name="university" required placeholder="e.g. Cairo University" class="field-input" />
+            <span class="error-message" id="err-university"></span>
+          </div>
+
+          <!-- Faculty -->
+          <div class="mb-4">
+            <label for="faculty" class="field-label">Faculty <span class="text-accent-600">*</span></label>
+            <input type="text" id="faculty" name="faculty" required placeholder="e.g. Faculty of Engineering" class="field-input" />
+            <span class="error-message" id="err-faculty"></span>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-4">
+          <label class="field-label">Gender <span class="text-accent-600">*</span></label>
+          <div class="flex gap-6">
+            <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+              <input type="radio" name="gender" value="Male" required class="h-4 w-4 accent-brand-500" />
+              Male
+            </label>
+            <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+              <input type="radio" name="gender" value="Female" required class="h-4 w-4 accent-brand-500" />
+              Female
+            </label>
+          </div>
+          <span class="error-message" id="err-gender"></span>
+        </div>
+
         <!-- Eraasoft student toggle -->
         <div class="mb-4">
           <label class="field-label">Are you (or were you) an Eraasoft student? <span class="text-accent-600">*</span></label>
