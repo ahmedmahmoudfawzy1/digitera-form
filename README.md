@@ -32,6 +32,7 @@ If you add/rename a field in `index.html`, update the matching field name in `ap
 
 - On a successful submission the browser is redirected to `success.html`. Validation / network errors show as a centered pop-up modal instead.
 - If you already had a "Responses" tab before the "Project Link" column was added, add the `Project Link` header manually as the last column (the script only writes headers when the tab is empty).
+- If a value ever lands under the wrong column header, run `resetHeaders_` once from the Apps Script editor: it rewrites row 1 to match `HEADERS` exactly without touching the data rows. `clearAllResponses_` wipes every response row (keeps the header) — use it to clear test data.
 - The Eraasoft-specific fields (Group Code, Branch, Instructor) only appear/are required when "Yes" is selected.
 - The Track dropdown is populated dynamically: choosing **Business** shows only "Data Analysis"; choosing **Technical** shows Front-end, Back-end .NET, Flutter, UI/UX, and Back-end PHP.
 - Every deployment update in Apps Script requires choosing **Deploy > Manage deployments > Edit > New version** for changes to `apps-script.gs` to take effect on the same URL.

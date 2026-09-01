@@ -45,9 +45,7 @@ function doPost(e) {
       data.projectLink || ""
     ]);
 
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: "success" }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ result: "success" })).setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     console.error("doPost failed: " + err.stack);
     throw err;
@@ -59,9 +57,7 @@ function doPost(e) {
 function doGet(e) {
   try {
     const sheet = getOrCreateSheet_();
-    return ContentService.createTextOutput(
-      "OK - sheet: " + sheet.getParent().getName() + " / tab: " + sheet.getName()
-    );
+    return ContentService.createTextOutput("OK - sheet: " + sheet.getParent().getName() + " / tab: " + sheet.getName());
   } catch (err) {
     return ContentService.createTextOutput("ERROR: " + err.message);
   }
@@ -71,6 +67,27 @@ function doGet(e) {
 // and (b) confirm a row lands in the right spreadsheet.
 function testAppend_() {
   doPost({ parameter: { fullName: "TEST ROW", email: "test@example.com" } });
+}
+
+// Run this once from the editor if the header row in the sheet has drifted out
+// of sync with HEADERS (e.g. a column landed under the wrong title). It rewrites
+// row 1 to exactly match HEADERS without touching the response rows below.
+function resetHeaders_() {
+  const sheet = getOrCreateSheet_();
+  const width = Math.max(sheet.getLastColumn(), HEADERS.length);
+  sheet.getRange(1, 1, 1, width).clearContent();
+  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight("bold");
+}
+
+// DESTRUCTIVE: deletes every response row (everything below the header row) and
+// rewrites row 1 to match HEADERS. Run manually from the editor to wipe old test data.
+function clearAllResponses_() {
+  const sheet = getOrCreateSheet_();
+  const lastRow = sheet.getLastRow();
+  if (lastRow > 1) {
+    sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).clearContent();
+  }
+  resetHeaders_();
 }
 
 function getOrCreateSheet_() {
