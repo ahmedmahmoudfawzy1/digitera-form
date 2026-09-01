@@ -139,6 +139,14 @@ function validateForm(data) {
         setError("faculty", "");
     }
 
+    // Academic status
+    if (!data.academicStatus) {
+        setError("academicStatus", "Please select whether you are a student or a graduate.");
+        isValid = false;
+    } else {
+        setError("academicStatus", "");
+    }
+
     // Gender
     if (!data.gender) {
         setError("gender", "Please select your gender.");

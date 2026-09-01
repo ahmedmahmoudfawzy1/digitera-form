@@ -188,6 +188,22 @@
           </div>
         </div>
 
+        <!-- Academic Status -->
+        <div class="mb-4">
+          <label class="field-label">Are you a student or a graduate? <span class="text-accent-600">*</span></label>
+          <div class="flex gap-6">
+            <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+              <input type="radio" name="academicStatus" value="Student" required class="h-4 w-4 accent-brand-500" />
+              Student
+            </label>
+            <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-700">
+              <input type="radio" name="academicStatus" value="Graduate" required class="h-4 w-4 accent-brand-500" />
+              Graduate
+            </label>
+          </div>
+          <span class="error-message" id="err-academicStatus"></span>
+        </div>
+
         <!-- Gender -->
         <div class="mb-4">
           <label class="field-label">Gender <span class="text-accent-600">*</span></label>

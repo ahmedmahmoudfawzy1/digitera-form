@@ -22,7 +22,8 @@ const HEADERS = [
   "Instructor",
   "Training Type",
   "Track",
-  "Project Link"
+  "Project Link",
+  "Academic Status"
 ];
 
 function doPost(e) {
@@ -55,7 +56,8 @@ function doPost(e) {
       data.instructor || "",
       data.trainingType || "",
       data.track || "",
-      data.projectLink || ""
+      data.projectLink || "",
+      data.academicStatus || ""
     ]);
 
     return jsonOutput_({ result: "success" });
