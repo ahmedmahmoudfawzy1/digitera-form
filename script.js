@@ -1,6 +1,8 @@
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzukbm1gByfDItDFGzc6jGdVTXhvLEwK4OxKFbMDGY3Eim9dEbsKqzDDfzvxrqiGGBNDg/exec";
 
+document.addEventListener("DOMContentLoaded", () => {
+
 const form = document.getElementById("registrationForm");
 const eraasoftRadios = document.querySelectorAll('input[name="isEraasoftStudent"]');
 const eraasoftFields = document.getElementById("eraasoftFields");
@@ -249,4 +251,5 @@ form.addEventListener("submit", async (e) => {
         submitBtn.disabled = false;
         submitBtn.textContent = "Submit";
     }
+});
 });
