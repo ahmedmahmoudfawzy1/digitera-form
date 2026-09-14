@@ -83,8 +83,7 @@ function jsonOutput_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
-// Quick check: open the /exec URL in a browser. If you see "OK - sheet: ..." the
-// script can reach the target spreadsheet and the deployment is live.
+
 function doGet(e) {
   try {
     const sheet = getOrCreateSheet_();
