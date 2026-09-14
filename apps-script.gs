@@ -1,8 +1,6 @@
-// Paste this code into Extensions > Apps Script inside your Google Sheet.
-// See README.md for full setup/deployment steps.
 
-const SHEET_NAME = "Responses"; // change if you want a different sheet/tab name
-const SPREADSHEET_ID = "1_xfmbhPuWdgu1gTWx4K9PF65wAjcwbR0boGws-jIeVc"; // target Google Sheet
+
+const SHEET_NAME = "Responses"; 
 
 const HEADERS = [
   "Timestamp",
@@ -20,8 +18,8 @@ const HEADERS = [
   "Group Code",
   "Branch",
   "Instructor",
-  "Training Type",
   "Track",
+  "Conscription Status",
   "Project Link",
   "Academic Status"
 ];
@@ -54,8 +52,8 @@ function doPost(e) {
       data.groupCode || "",
       data.branch || "",
       data.instructor || "",
-      data.trainingType || "",
       data.track || "",
+      data.conscriptionStatus || "",
       data.projectLink || "",
       data.academicStatus || ""
     ]);
@@ -124,7 +122,7 @@ function clearAllResponses_() {
 }
 
 function getOrCreateSheet_() {
-  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const ss = SpreadsheetApp.getActiveSpreadsheet(); // the sheet this script is bound to
   let sheet = ss.getSheetByName(SHEET_NAME);
 
   if (!sheet) {

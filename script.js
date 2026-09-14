@@ -1,22 +1,14 @@
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynuxMKnr_LqFW0BoozwdFioZorxYOx1VfeEyBUqmpjb7MejcX8aOD_-NUVgmzm7Y8Kww/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzukbm1gByfDItDFGzc6jGdVTXhvLEwK4OxKFbMDGY3Eim9dEbsKqzDDfzvxrqiGGBNDg/exec";
 
 const form = document.getElementById("registrationForm");
 const eraasoftRadios = document.querySelectorAll('input[name="isEraasoftStudent"]');
 const eraasoftFields = document.getElementById("eraasoftFields");
-const trainingType = document.getElementById("trainingType");
-const trackGroup = document.getElementById("trackGroup");
-const trackSelect = document.getElementById("track");
 const submitBtn = document.getElementById("submitBtn");
 const modalOverlay = document.getElementById("modalOverlay");
 const modalIcon = document.getElementById("modalIcon");
 const modalText = document.getElementById("modalText");
 const modalClose = document.getElementById("modalClose");
-
-const TRACKS = {
-    Business: ["Data Analysis"],
-    Technical: ["Front-end", "Back-end .NET", "Flutter", "UI/UX", "Back-end PHP"]
-};
 
 // Show/hide Eraasoft-specific fields
 eraasoftRadios.forEach((radio) => {
@@ -32,24 +24,6 @@ eraasoftRadios.forEach((radio) => {
             if (!showFields) input.value = "";
         });
     });
-});
-
-// Populate track options based on training type
-trainingType.addEventListener("change", () => {
-    const type = trainingType.value;
-    const options = TRACKS[type] || [];
-
-    trackSelect.innerHTML = '<option value="" disabled selected>Select track</option>';
-    options.forEach((opt) => {
-        const el = document.createElement("option");
-        el.value = opt;
-        el.textContent = opt;
-        trackSelect.appendChild(el);
-    });
-
-    const show = options.length > 0;
-    trackGroup.classList.toggle("hidden", !show);
-    trackSelect.required = show;
 });
 
 function setError(fieldId, message) {
@@ -183,20 +157,20 @@ function validateForm(data) {
         }
     }
 
-    // Training type
-    if (!data.trainingType) {
-        setError("trainingType", "Please select a training type.");
-        isValid = false;
-    } else {
-        setError("trainingType", "");
-    }
-
     // Track
     if (!data.track) {
         setError("track", "Please select a track.");
         isValid = false;
     } else {
         setError("track", "");
+    }
+
+    // Military conscription status
+    if (!data.conscriptionStatus) {
+        setError("conscriptionStatus", "Please select your conscription status.");
+        isValid = false;
+    } else {
+        setError("conscriptionStatus", "");
     }
 
     // Project link

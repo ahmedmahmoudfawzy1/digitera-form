@@ -286,24 +286,27 @@
         </div>
 
         <div class="grid gap-x-4 sm:grid-cols-2">
-          <!-- Training type -->
+          <!-- Track -->
           <div class="mb-4">
-            <label for="trainingType" class="field-label">Training Type <span class="text-accent-600">*</span></label>
-            <select id="trainingType" name="trainingType" required class="field-input">
-              <option value="" disabled selected>Select training type</option>
-              <option value="Business">Business</option>
-              <option value="Technical">Technical</option>
-            </select>
-            <span class="error-message" id="err-trainingType"></span>
-          </div>
-
-          <!-- Track (populated dynamically) -->
-          <div class="hidden mb-4" id="trackGroup">
             <label for="track" class="field-label">Track <span class="text-accent-600">*</span></label>
-            <select id="track" name="track" class="field-input">
+            <select id="track" name="track" required class="field-input">
               <option value="" disabled selected>Select track</option>
+              <option value="Data Analysis">Data Analysis</option>
+              <option value="AI">AI</option>
             </select>
             <span class="error-message" id="err-track"></span>
+          </div>
+
+          <!-- Military Conscription Status -->
+          <div class="mb-4">
+            <label for="conscriptionStatus" class="field-label">Military Conscription Status <span class="text-accent-600">*</span></label>
+            <select id="conscriptionStatus" name="conscriptionStatus" required class="field-input">
+              <option value="" disabled selected>Select status</option>
+              <option value="Deferred">Deferred (تأجيل)</option>
+              <option value="Exempted">Exempted (إعفاء)</option>
+              <option value="Not Required">Not Required (غير مطلوب)</option>
+            </select>
+            <span class="error-message" id="err-conscriptionStatus"></span>
           </div>
         </div>
 
